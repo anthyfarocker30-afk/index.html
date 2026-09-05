@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de Cumplimiento GRI 102 - Ecopetrol 2020</title>
+  <style>
+    :root{
+      --green:#007a3d;
+      --green-dark:#005a2b;
+      --green-soft:#eaf5ef;
+      --gold:#c9a227;
+      --ink:#17221d;
+      --muted:#65736c;
+      --line:#dfe7e2;
+      --bg:#f5f7f6;
+      --white:#fff;
+      --shadow:0 16px 45px rgba(15,35,24,.10);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box;scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.7;
+    }
+
+    .topbar{
+      height:5px;
+      background:linear-gradient(90deg,var(--green-dark),var(--green),var(--gold));
+    }
+
+    header{
+      position:relative;
+      overflow:hidden;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.16), transparent 24%),
+        radial-gradient(circle at 15% 90%, rgba(201,162,39,.14), transparent 28%),
+        linear-gradient(135deg,#003d20 0%,#006b38 58%,#00834a 100%);
+      padding:76px 22px 86px;
+    }
+
+    header:after{
+      content:"";
+      position:absolute;
+      width:420px;height:420px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:50%;
+      right:-160px;bottom:-230px;
+      box-shadow:0 0 0 55px rgba(255,255,255,.025),0 0 0 110px rgba(255,255,255,.02);
+    }
+
+    .hero{
+      position:relative;
+      z-index:1;
+      max-width:1120px;
+      margin:auto;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:8px 13px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      border-radius:999px;
+    }
+
+    .eyebrow span{
+      width:7px;height:7px;border-radius:50%;
+      background:var(--gold);
+      display:inline-block;
+    }
+
+    header h1{
+      max-width:920px;
+      margin:22px 0 12px;
+      font-size:clamp(2.4rem,6vw,4.5rem);
+      line-height:1.04;
+      letter-spacing:-.04em;
+    }
+
+    header .subtitle{
+      max-width:760px;
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:1.12rem;
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:28px;
+    }
+
+    .hero-meta span{
+      padding:9px 13px;
+      border-radius:10px;
+      background:rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:.9rem;
+    }
+
+    nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+      box-shadow:0 4px 18px rgba(0,0,0,.05);
+    }
+
+    .nav-inner{
+      max-width:1120px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      gap:5px;
+      padding:9px 18px;
+      overflow-x:auto;
+    }
+
+    nav a{
+      flex:0 0 auto;
+      color:#3d4b44;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.86rem;
+      padding:9px 11px;
+      border-radius:9px;
+    }
+
+    nav a:hover{
+      color:var(--green);
+      background:var(--green-soft);
+    }
+
+    main{
+      max-width:1120px;
+      margin:auto;
+      padding:55px 20px 80px;
+    }
+
+    section{
+      margin-bottom:65px;
+      scroll-margin-top:85px;
+    }
+
+    .section-label{
+      color:var(--green);
+      font-size:.76rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.13em;
+      margin-bottom:5px;
+    }
+
+    h2{
+      margin:0 0 22px;
+      color:var(--ink);
+      font-size:clamp(1.7rem,3vw,2.35rem);
+      letter-spacing:-.025em;
+    }
+
+    .lead{
+      max-width:900px;
+      color:var(--muted);
+      font-size:1.04rem;
+    }
+
+    .destacado{
+      position:relative;
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .destacado:before{
+      content:"";
+      position:absolute;
+      top:0;left:0;bottom:0;
+      width:5px;
+      background:linear-gradient(var(--green),var(--gold));
+    }
+
+    .destacado p:first-child{margin-top:0}
+    .destacado p:last-child{margin-bottom:0}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:15px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      border:1px solid #cce5d6;
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    .badge:before{
+      content:"✓";
+      display:grid;
+      place-items:center;
+      width:19px;height:19px;
+      border-radius:50%;
+      background:var(--green);
+      color:#fff;
+      font-size:.72rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:25px;
+      box-shadow:0 8px 25px rgba(15,35,24,.055);
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow);
+      border-color:#c8dbd0;
+    }
+
+    .card h3{
+      color:var(--green-dark);
+      margin:0 0 9px;
+      font-size:1.08rem;
+    }
+
+    .card p{margin:0;color:var(--muted)}
+
+    .kpi{
+      min-height:155px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+      background:linear-gradient(180deg,#fff,#f8fbf9);
+    }
+
+    .kpi strong{
+      display:block;
+      color:var(--green);
+      font-size:2.45rem;
+      line-height:1.1;
+      letter-spacing:-.04em;
+    }
+
+    .kpi span{
+      color:var(--muted);
+      margin-top:7px;
+      font-weight:700;
+      font-size:.9rem;
+    }
+
+    .pillar-number{
+      display:inline-grid;
+      place-items:center;
+      width:38px;height:38px;
+      margin-bottom:16px;
+      border-radius:11px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--green-dark),var(--green));
+      font-weight:900;
+    }
+
+    .material-wrap{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:25px 30px;
+      box-shadow:0 8px 25px rgba(15,35,24,.05);
+    }
+
+    ol.materiales{
+      margin:0;
+      padding-left:25px;
+      columns:2;
+      column-gap:60px;
+    }
+
+    ol.materiales li{
+      break-inside:avoid;
+      padding:9px 0 9px 7px;
+      font-weight:650;
+    }
+
+    ol.materiales li::marker{
+      color:var(--green);
+      font-weight:900;
+    }
+
+    .recommendation{
+      display:grid;
+      grid-template-columns:150px 1fr;
+      gap:22px;
+      align-items:start;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:25px;
+      margin-bottom:16px;
+      box-shadow:0 7px 22px rgba(15,35,24,.05);
+    }
+
+    .recommendation-code{
+      color:var(--green-dark);
+      background:var(--green-soft);
+      border:1px solid #cce5d6;
+      border-radius:12px;
+      padding:10px;
+      text-align:center;
+      font-weight:900;
+      font-size:.88rem;
+    }
+
+    .recommendation h3{
+      margin:0 0 5px;
+      font-size:1.05rem;
+    }
+
+    .recommendation p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .conclusion{
+      background:linear-gradient(135deg,#003d20,#087a42);
+      color:#fff;
+      border-radius:24px;
+      padding:38px;
+      box-shadow:var(--shadow);
+    }
+
+    .conclusion h2{color:#fff}
+    .conclusion p{color:rgba(255,255,255,.88)}
+    .conclusion .section-label{color:#d8c36b}
+
+    .sources-note{
+      margin-top:30px;
+      padding:16px 18px;
+      border-radius:12px;
+      background:#f0f3f1;
+      color:#53625a;
+      font-size:.86rem;
+    }
+
+    footer{
+      background:#0d2017;
+      color:#b9c6bf;
+      padding:35px 20px;
+    }
+
+    .footer-inner{
+      max-width:1120px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      gap:25px;
+      flex-wrap:wrap;
+    }
+
+    footer strong{color:#fff}
+    footer p{margin:5px 0}
+
+    @media(max-width:850px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .recommendation{grid-template-columns:1fr}
+    }
+
+    @media(max-width:620px){
+      header{padding:55px 20px 65px}
+      .grid{grid-template-columns:1fr}
+      ol.materiales{columns:1}
+      main{padding-top:40px}
+      .destacado,.conclusion{padding:25px}
+      .hero-meta{flex-direction:column;align-items:flex-start}
+    }
+
+    @media print{
+      nav{display:none}
+      header{padding:35px;color:#000;background:#fff}
+      header h1,header .subtitle{color:#000}
+      main{padding:25px}
+      .card,.destacado{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="topbar"></div>
+<header>
+  <div class="hero">
+    <div class="eyebrow"><span></span> Informe académico · Sostenibilidad y transparencia</div>
+    <h1>Análisis de Cumplimiento GRI 102</h1>
+    <p class="subtitle">
+      Evaluación técnica del Reporte Integrado de Gestión Sostenible de
+      <strong>Ecopetrol S.A. · 2020</strong>
+    </p>
+    <div class="hero-meta">
+      <span>GRI 102: Contenidos Generales (2016)</span>
+      <span>Evaluación de cumplimiento</span>
+      <span>Enfoque ESG</span>
+    </div>
+  </div>
+</header>
+
+
+<nav>
+  <div class="nav-inner">
+  <a href="#introduccion">Introducción</a>
+  <a href="#resumen">Resumen</a>
+  <a href="#indicadores">Indicadores</a>
+  <a href="#pilares">Pilares GRI</a>
+  <a href="#materialidad">Materialidad</a>
+  <a href="#fortalezas">Fortalezas</a>
+  <a href="#recomendaciones">Recomendaciones</a>
+  <a href="#conclusion">Conclusión</a>
+  </div>
+</nav>
+
+<main>
+
+
+  <section id="introduccion">
+    <div class="section-label">01 · Contexto</div>
+    <h2>Introducción</h2>
+    <div class="destacado">
+      <p>
+        La presente página web ofrece una síntesis del análisis técnico de cumplimiento de
+        Ecopetrol S.A. frente al Estándar GRI 102: Contenidos Generales (2016), correspondiente
+        al Reporte Integrado de Gestión Sostenible 2020. El propósito es presentar de manera
+        clara y accesible los principales elementos relacionados con el perfil de la organización,
+        su estrategia, ética e integridad, gobernanza, relacionamiento con los grupos de interés
+        y las prácticas utilizadas para la elaboración de sus informes.
+      </p>
+      <p>
+        El análisis permite identificar las principales fortalezas de Ecopetrol en materia de
+        transparencia y sostenibilidad, así como los temas materiales que orientan su gestión.
+        De acuerdo con el informe, la organización presenta un nivel de madurez técnica elevado
+        y un <strong>cumplimiento sólido</strong> del estándar analizado.
+      </p>
+    </div>
+  </section>
+
+  <section id="resumen">
+    <div class="section-label">02 · Evaluación</div>
+    <h2>Resumen de opinión técnica</h2>
+    <div class="destacado">
+      <p>
+        El análisis evalúa la alineación técnica y el nivel de transparencia de Ecopetrol S.A.
+        frente al Estándar GRI 102: Contenidos Generales (2016). El reporte presenta una
+        estructura metodológica coherente y remite al Índice de Contenidos GRI para facilitar
+        la trazabilidad de la información.
+      </p>
+      <span class="badge">Opinión general: Cumplimiento sólido</span>
+    </div>
+  </section>
+
+  <section id="indicadores">
+    <div class="section-label">03 · Datos destacados</div>
+    <h2>Indicadores clave del reporte</h2>
+    <div class="grid">
+      <div class="card kpi"><strong>88,49%</strong><span>Propiedad estatal</span></div>
+      <div class="card kpi"><strong>9.677</strong><span>Trabajadores</span></div>
+      <div class="card kpi"><strong>3.480</strong><span>Proveedores</span></div>
+      <div class="card kpi"><strong>24%</strong><span>Liderazgo femenino</span></div>
+      <div class="card kpi"><strong>28</strong><span>Elementos materiales</span></div>
+      <div class="card kpi"><strong>10</strong><span>Temas prioritarios</span></div>
+    </div>
+  </section>
+
+  <section id="pilares">
+    <div class="section-label">04 · Marco de análisis</div>
+    <h2>Pilares del Estándar GRI 102</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="pillar-number">1</div>
+        <h3>1. Perfil de la organización</h3>
+        <p>
+          Incluye identidad, estructura de propiedad, capacidad operativa, desempeño financiero,
+          capital humano, cadena de suministro y compromisos ambientales.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="pillar-number">2</div>
+        <h3>2. Estrategia, ética e integridad</h3>
+        <p>
+          El enfoque institucional se soporta en una declaración cultural de seis principios,
+          destacando “Éticos siempre” como referente de integridad y transparencia.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="pillar-number">3</div>
+        <h3>3. Gobernanza</h3>
+        <p>
+          La Junta Directiva ejerce supervisión sobre los riesgos económicos, ambientales y sociales,
+          integrando la sostenibilidad dentro de la toma de decisiones.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="pillar-number">4</div>
+        <h3>4. Grupos de interés</h3>
+        <p>
+          El reporte identifica siete grupos prioritarios y mecanismos de relacionamiento con
+          empleados, proveedores, comunidades, clientes, inversionistas, Estado y sociedad.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="pillar-number">5</div>
+        <h3>5. Elaboración de informes</h3>
+        <p>
+          El análisis de materialidad permite enfocar el reporte en los asuntos con mayor impacto
+          para la sociedad y para el valor del negocio a largo plazo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="materialidad">
+    <div class="section-label">05 · Materialidad</div>
+    <h2>Temas materiales prioritarios</h2>
+    <div class="material-wrap">
+    <ol class="materiales">
+      <li>Cambio climático</li>
+      <li>Gestión del agua</li>
+      <li>Economía circular</li>
+      <li>Salud y seguridad</li>
+      <li>Desarrollo territorial</li>
+      <li>Ética y transparencia</li>
+      <li>Gobierno corporativo</li>
+      <li>Derechos humanos</li>
+      <li>Gestión de la cadena de suministro</li>
+      <li>Inversión social</li>
+    </ol>
+    </div>
+  </section>
+
+  <section id="fortalezas">
+    <div class="section-label">06 · Desempeño</div>
+    <h2>Fortalezas sostenibles</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>SosTECnibilidad</h3>
+        <p>
+          Integración de tecnología con las dimensiones ambiental, social y de gobernanza
+          como habilitador de eficiencia y cumplimiento.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Meta 2030</h3>
+        <p>Reducción del 25% de las emisiones de gases de efecto invernadero.</p>
+      </div>
+
+      <div class="card">
+        <h3>Meta 2050</h3>
+        <p>Compromiso formal de alcanzar la carbono neutralidad total.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recomendaciones">
+    <div class="section-label">07 · Oportunidades de mejora</div>
+    <h2>Recomendaciones técnicas</h2>
+
+    <div class="recommendation">
+      <div class="recommendation-code">GRI 102-10</div>
+      <div><h3>Evolución de la cadena de suministro</h3>
+      <p>
+        Profundizar en la descripción de cambios significativos en la estructura de suministro,
+        incluyendo ubicación geográfica de nuevos proveedores críticos.
+      </p></div>
+    </div>
+
+    <div class="recommendation">
+      <div class="recommendation-code">GRI 102-21</div>
+      <div><h3>Procesos de consulta y delegación</h3>
+      <p>
+        Especificar con mayor claridad cómo los resultados de la consulta a grupos de interés
+        locales son elevados a la Junta Directiva y cómo se materializa la retroalimentación.
+      </p>
+    </div>
+  </section>
+
+
+  <section id="conclusion">
+    <div class="conclusion">
+      <div class="section-label">08 · Cierre</div>
+      <h2>Conclusión</h2>
+      <div class="destacado" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);box-shadow:none;color:#fff;">
+      <p>
+        El análisis del reporte 2020 evidencia que Ecopetrol S.A. cuenta con una estructura de
+        reporte alineada con los principales requerimientos del GRI 102 y con mecanismos que
+        favorecen la transparencia, la trazabilidad y la rendición de cuentas. La integración
+        de la gobernanza, la ética y la sostenibilidad dentro de la gestión empresarial constituye
+        una de las principales fortalezas identificadas.
+      </p>
+      <p>
+        Asimismo, la definición de diez temas materiales prioritarios refleja una focalización
+        estratégica sobre asuntos relevantes como cambio climático, gestión del agua, salud y
+        seguridad, derechos humanos, ética, gobierno corporativo y desarrollo territorial.
+        Aunque el nivel de cumplimiento es considerado sólido, el informe recomienda fortalecer
+        la información relacionada con la evolución de la cadena de suministro y con la forma en
+        que los resultados de las consultas a los grupos de interés son elevados a la Junta
+        Directiva.
+      </p>
+      <p>
+        En conjunto, el reporte analizado demuestra un nivel de madurez técnica elevado y ofrece
+        una base adecuada para continuar fortaleciendo la transparencia y la gestión sostenible
+        de la organización.
+      </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Análisis de Cumplimiento GRI 102</strong>
+      <p>Ecopetrol S.A. · Reporte Integrado 2020</p>
+    </div>
+    <div>
+      <p>Proyecto académico · Sostenibilidad · ESG</p>
+      <p>Contenido basado en el informe técnico proporcionado.</p>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
